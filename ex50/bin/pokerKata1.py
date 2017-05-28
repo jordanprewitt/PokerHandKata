@@ -4,6 +4,7 @@ from helpers import assertEqual
 
 def face(x):
     firstCharacter = x[0]
+    secondCharacter = x[1]
     if firstCharacter == "A":
         return 14
     if firstCharacter == "K": 
@@ -12,9 +13,10 @@ def face(x):
         return 12
     if firstCharacter == "J":
         return 11
-    if firstCharacter == "1":
-        # please show how to do this if there really was a 1
+    if secondCharacter == "0":
         return 10
+    if firstCharacter == "1":
+        return 1
     else:
         return int(firstCharacter)
     
@@ -27,6 +29,8 @@ assertEqual(12, face("QD"))
 assertEqual(14, face("AH"))
 assertEqual(11, face("JH"))
 assertEqual(10, face("10H"))
+assertEqual(1, face("1H"))
+
 
 
 def suit(x):
@@ -34,6 +38,9 @@ def suit(x):
    if firstCharacter == "1":
        return x[2]
    else: return x[1]
+
+
+    
 
 assertEqual("H", suit("2H"))
 assertEqual("D", suit("10D"))
