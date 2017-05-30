@@ -1,6 +1,7 @@
 #Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C AH
 
 def highCard(hand):
+    # how to do with dictionary?
     hand.sort(reverse=True, key=face)
     firstCard = hand[0]
     return firstCard
@@ -31,6 +32,7 @@ def face(x):
     else:
         return int(firstCharacter)
 
+#10 card
 def suit(x):
    firstCharacter = x[0]
    if firstCharacter == "1":
@@ -41,3 +43,16 @@ def rank(x,y):
     if (face(x) > face(y)) :
         return x
     else: return y
+
+def isTwoOfAKind(hand):
+    cardCounts = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    for card in hand:
+        faceValue = face(card)
+        countOfThisCardFace = cardCounts[faceValue]
+        cardCounts[faceValue] = countOfThisCardFace + 1
+        countOfThisCardFace = cardCounts[faceValue]
+        if countOfThisCardFace == 2:
+            return faceValue
+
+    
+    
