@@ -1,5 +1,5 @@
 from helpers import assertEqual, printFailures
-from pokerFunction import face, suit, rank, highCard, highCardWinner, isTwoOfAKind
+from pokerFunction import face, suit, rank, highCard, highCardWinner, isTwoOfAKind, isThreeOfAKind,isFourOfAKind
 
 #Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C AH
 
@@ -30,8 +30,13 @@ assertEqual("D", suit("10D"))
 
 assertEqual(2, isTwoOfAKind("2H 3D 5S 9C 2D".split()))
 assertEqual(3, isTwoOfAKind("3H 3D 5S 9C 2D".split()))
+assertEqual("No", isTwoOfAKind("3H 7D 5S 9C 2D".split()))
 
-
+assertEqual(2, isThreeOfAKind("2H 2D 5S 9C 2D".split()))
+assertEqual("No", isThreeOfAKind("2H 3D 5S 9C 6D".split()))
     
+assertEqual(2, isFourOfAKind("2H 2D 2S 9C 2D".split()))
+assertEqual("No", isFourOfAKind("2H 3D 5S 9C 6D".split()))
+
 
 printFailures()

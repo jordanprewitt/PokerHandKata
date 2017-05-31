@@ -45,14 +45,22 @@ def rank(x,y):
     else: return y
 
 def isTwoOfAKind(hand):
-    cardCounts = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    return isOfAKind(hand,2)
+
+def isThreeOfAKind(hand):
+    return isOfAKind(hand, 3)
+def isFourOfAKind(hand):
+    return isOfAKind(hand,4)
+    
+def isOfAKind(hand, desiredCount):
+    cardCounts = [0]*14
     for card in hand:
-        faceValue = face(card)
-        countOfThisCardFace = cardCounts[faceValue]
-        cardCounts[faceValue] = countOfThisCardFace + 1
-        countOfThisCardFace = cardCounts[faceValue]
-        if countOfThisCardFace == 2:
+        faceValue=face(card)
+        cardCounts[faceValue] = cardCounts[faceValue] +1
+        if cardCounts[faceValue]==desiredCount:
             return faceValue
+    return "No"
+    
 
     
     
