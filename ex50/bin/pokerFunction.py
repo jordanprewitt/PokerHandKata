@@ -48,19 +48,81 @@ def isTwoOfAKind(hand):
     return isOfAKind(hand,2)
 
 def isThreeOfAKind(hand):
-    return isOfAKind(hand, 3)
+        return isOfAKind(hand,3)
+    
 def isFourOfAKind(hand):
     return isOfAKind(hand,4)
     
 def isOfAKind(hand, desiredCount):
-    cardCounts = [0]*14
+    cardCounts = [0]*15
     for card in hand:
         faceValue=face(card)
-        cardCounts[faceValue] = cardCounts[faceValue] +1
+        cardCounts[faceValue] = cardCounts[faceValue] + 1
+       
+    for card in hand:
+        faceValue=face(card)
         if cardCounts[faceValue]==desiredCount:
             return faceValue
     return "No"
     
+def isTwoPair(hand):
+    hand.sort(reverse=False, key=face)
+    firstTwoOfAKind = isTwoOfAKind(hand)
+    hand.sort(reverse=True, key=face)
+    secondTwoOfAKind = isTwoOfAKind(hand)
+    if (firstTwoOfAKind == secondTwoOfAKind):
+        return "No"
+    return firstTwoOfAKind, secondTwoOfAKind
+    
+def isFullHouse(hand):
+    if isThreeOfAKind(hand) != "No" and isTwoOfAKind(hand) != "No":
+         return isThreeOfAKind(hand), isTwoOfAKind(hand)
+    
+    else:
+        return "No"
+    
+def isFlush(hand):
+    firstSuit = suit(hand[0])
+    for card in hand:
+        if(firstSuit != suit(card)):
+            return "No"
+    return firstSuit
 
+def isStraight(hand):
+    hand.sort(reverse=False, key=face)
+    if (face(hand[4]) - face(hand[0])) == 4 and  isTwoOfAKind(hand) == "No" and  isThreeOfAKind(hand) == "No" and  isFourOfAKind(hand) == "No":
+        return face(hand[4])
+    else:
+        return "No"
+        
+def isStraightFlush(hand):
+    if isFlush(hand) != "No" and isStraight(hand) != "No":
+        return isStraight(hand)
+    else:
+        return "No"
+    
+
+def isRoyalFlush(hand):
+    wasStraightFlush = isStraightFlush(hand) 
+    if wasStraightFlush != "No" and wasStraightFlush == 14:
+        return 14
+    else:
+        return "No"
+        
+def identifyHand(hand):
+    if isTwoPair(hand) !="No":
+        highPair = isTwoPair(hand)[1]
+        return {'name': "Two Pair", "rank": 3, "highcard": highPair}
+    elif isTwoOfAKind(hand) != "No":
+        return {'name': "Two of a Kind", "rank": 2, "highcard": isTwoOfAKind(hand)}
+    elif isThreeOfAKind(hand) != "No":
+        return {'name': "Three of a Kind", "rank": 4, "highcard": isThreeOfAKind(hand)}
+    elif isStraight(hand) != "No":
+        return {"name": "Straight", "rank": 5, "highcard": isStraight(hand)}
+    else:
+        return {'name': "Four of a Kind", "rank": 8, "highcard": isFourOfAKind(hand)}
+        
+    
+    
     
     
