@@ -50,7 +50,7 @@ assertEqual((5,2), isFullHouse("2H 2D 5S 5C 5D".split()))
 assertEqual("No", isFullHouse("2H 3D 5S 5C 5D".split()))
 
 
-assertEqual("H", isFlush("2H 3H 5H 4H 7H".split()))
+assertEqual(7, isFlush("2H 3H 5H 4H 7H".split()))
 assertEqual("No", isFlush("2H 3D 4H 5H 6H".split()))
 
 assertEqual(6, isStraight("3D 2H 4H 5H 6H".split()))
@@ -69,7 +69,16 @@ assertEqual({"name": "Two Pair", "rank":3, "highcard": 5}, identifyHand("5H 5D 3
 assertEqual({"name": "Two Pair", "rank":3, "highcard": 6}, identifyHand("5H 6D 3S 3C 6C".split()))
 assertEqual({"name": "Three of a Kind", "rank":4, "highcard":5}, identifyHand("5H 5D 5S 9C 2D".split()))
 assertEqual({"name": "Straight", "rank":5, "highcard": 6}, identifyHand("3D 2H 4H 5H 6H".split()))
+assertEqual({"name": "Flush", "rank":6, "highcard": 10}, identifyHand("10H 2H 3H 4H 5H".split()))
+assertEqual({"name": "Full House", "rank":7, "highcard": 10}, identifyHand("10H 10H 10H 4C 4H".split()))
 assertEqual({"name": "Four of a Kind", "rank":8, "highcard": 5}, identifyHand("5H 5D 5S 9C 5C".split()))
+assertEqual({"name": "Straight Flush", "rank":9, "highcard": 6}, identifyHand("5H 2H 3H 4H 6H".split()))
+assertEqual({"name": "Straight Flush", "rank":9, "highcard": 7}, identifyHand("5H 7H 3H 4H 6H".split()))
+assertEqual({"name": "Royal Flush", "rank":10, "highcard": 14}, identifyHand("AH KH 10H QH JH".split()))
+
+assertEqual({"name": "High Card", "rank":1, "highcard": 14}, identifyHand("2H 3D 5S 9C AH".split()))
+assertEqual({"name": "High Card", "rank":1, "highcard": 13}, identifyHand("2H 3D 5S 9C KH".split()))
+
 
 #print(hand)
 printFailures()

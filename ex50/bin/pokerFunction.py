@@ -27,12 +27,9 @@ def face(x):
         return 11
     if secondCharacter == "0":
         return 10
-    if firstCharacter == "1":
-        return 1
     else:
         return int(firstCharacter)
 
-#10 card
 def suit(x):
    firstCharacter = x[0]
    if firstCharacter == "1":
@@ -72,12 +69,11 @@ def isTwoPair(hand):
     secondTwoOfAKind = isTwoOfAKind(hand)
     if (firstTwoOfAKind == secondTwoOfAKind):
         return "No"
-    return firstTwoOfAKind, secondTwoOfAKind
+    return (firstTwoOfAKind, secondTwoOfAKind)
     
 def isFullHouse(hand):
     if isThreeOfAKind(hand) != "No" and isTwoOfAKind(hand) != "No":
-         return isThreeOfAKind(hand), isTwoOfAKind(hand)
-    
+         return (isThreeOfAKind(hand), isTwoOfAKind(hand))
     else:
         return "No"
     
@@ -86,7 +82,7 @@ def isFlush(hand):
     for card in hand:
         if(firstSuit != suit(card)):
             return "No"
-    return firstSuit
+    return face(highCard(hand))
 
 def isStraight(hand):
     hand.sort(reverse=False, key=face)
@@ -113,15 +109,24 @@ def identifyHand(hand):
     if isTwoPair(hand) !="No":
         highPair = isTwoPair(hand)[1]
         return {'name': "Two Pair", "rank": 3, "highcard": highPair}
+    elif isFullHouse(hand) != "No":
+        return {"name": "Full House", "rank": 7, "highcard": isFullHouse(hand)[0]}
     elif isTwoOfAKind(hand) != "No":
         return {'name': "Two of a Kind", "rank": 2, "highcard": isTwoOfAKind(hand)}
     elif isThreeOfAKind(hand) != "No":
         return {'name': "Three of a Kind", "rank": 4, "highcard": isThreeOfAKind(hand)}
+    elif isRoyalFlush(hand) != "No":
+        return {"name": "Royal Flush", "rank": 10, "highcard": 14}
+    elif isStraightFlush(hand) != "No":
+        return {"name": "Straight Flush", "rank": 9, "highcard": isStraightFlush(hand)}
     elif isStraight(hand) != "No":
         return {"name": "Straight", "rank": 5, "highcard": isStraight(hand)}
-    else:
+    elif isFlush(hand) != "No":
+        return {"name": "Flush", "rank": 6, "highcard": isFlush(hand)}
+    elif isFourOfAKind(hand) != "No":
         return {'name': "Four of a Kind", "rank": 8, "highcard": isFourOfAKind(hand)}
-        
+    else:
+        return {"name": "High Card", "rank": 1, "highcard": face(highCard(hand))}
     
     
     
