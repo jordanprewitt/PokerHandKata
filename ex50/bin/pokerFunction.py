@@ -1,4 +1,4 @@
-#Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C AH
+# Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C AH
 
 def highCard(hand):
     # how to do with dictionary?
@@ -128,6 +128,18 @@ def identifyHand(hand):
     else:
         return {"name": "High Card", "rank": 1, "highcard": face(highCard(hand))}
     
-    
+def gameWinner(white, black):
+    blackHand = identifyHand(black)
+    whiteHand = identifyHand(white)
+    if blackHand["rank"] > whiteHand["rank"]:
+        return "Black Wins with " + blackHand["name"]
+    elif blackHand["rank"] < whiteHand["rank"]:
+        return "White Wins with " + whiteHand["name"]
+    else:
+        if blackHand["highcard"] > whiteHand["highcard"]: 
+            return "Black Wins with " + blackHand["name"]
+        else:
+            return "White Wins with " + whiteHand["name"]
+
     
     

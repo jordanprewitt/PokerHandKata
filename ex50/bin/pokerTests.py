@@ -1,5 +1,5 @@
 from helpers import assertEqual, printFailures
-from pokerFunction import face, suit, rank, highCard, highCardWinner, isTwoOfAKind, isThreeOfAKind,isFourOfAKind,isTwoPair, isFullHouse,  isFlush, isStraight, isStraightFlush, isRoyalFlush, identifyHand
+from pokerFunction import face, suit, rank, highCard, highCardWinner, isTwoOfAKind, isThreeOfAKind,isFourOfAKind,isTwoPair, isFullHouse,  isFlush, isStraight, isStraightFlush, isRoyalFlush, identifyHand,  gameWinner
 
 #Black: 2H 3D 5S 9C KD  White: 2C 3H 4S 8C AH
 
@@ -79,6 +79,9 @@ assertEqual({"name": "Royal Flush", "rank":10, "highcard": 14}, identifyHand("AH
 assertEqual({"name": "High Card", "rank":1, "highcard": 14}, identifyHand("2H 3D 5S 9C AH".split()))
 assertEqual({"name": "High Card", "rank":1, "highcard": 13}, identifyHand("2H 3D 5S 9C KH".split()))
 
+assertEqual("Black Wins with Flush", gameWinner("2H 3D 5S 9C KH".split(), "2H 3H 5H 9H KH".split()))
+assertEqual("White Wins with Flush", gameWinner("2H 3H 5H 9H KH".split(), "2H 3D 5S 9C KH".split()))
+assertEqual("Black Wins with Flush", gameWinner("2H 3H 5H 9H KH".split(), "2H 3H 5H 9H AH".split()))
 
 #print(hand)
 printFailures()
